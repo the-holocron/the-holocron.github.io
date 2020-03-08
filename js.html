@@ -1,0 +1,127 @@
+---
+layout: default
+title: JS
+description: Standards for writing consistent, flexible, and sustainable behaviors within the Galaxy.
+icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 692 782">
+  <defs/>
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#fff" d="M1 1h690v780H1z"/>
+    <path fill="#f7df1e" fill-rule="nonzero" d="M262 733V592.231h-26.95v58.483c0 9.644 1.852 25.445 1.852 25.445s-9.67-12.723-16.458-19.084L149.88 591H147v140.769h26.95v-58.483c0-10.055-2.057-25.445-2.057-25.445s9.669 12.517 16.663 19.084L259.12 733H262zm123-1v-25.324h-65.638V686.5h55.306v-24.706h-55.306v-44.47h62.802V592H291v140h94zm47.222 0l21.587-37.265c4.318-7.411 8.635-19.764 8.635-19.764s5.345 12.558 9.663 19.764L494.105 732H527l-46.464-76.794L517.954 592H487.32l-13.57 24.088c-4.111 7.206-8.017 19.147-8.017 19.147s-5.14-12.147-9.252-19.147L442.296 592h-32.69l38.035 63L402 732h30.222zm172.729 0V617.324H645V592H536v25.324h40.05V732h28.9z"/>
+  </g>
+</svg>'
+---
+
+<section class="section" id="syntax">
+	<h2>Syntax</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>Use <code>let</code> and <code>const</code> over <code>var</code>.  There's a lot of discussion on all of this, but we've chosen to stick with <code>const</code> and <code>let</code>.</li>
+				<li>Prefer <code>const</code> for variables that do not or should not be reassigned.  For all else, use <code>let</code>.</li>
+				<li>Prefer template literal backticks over single or double quotes for reasons <a href="https://twitter.com/wesbos/status/1108013865210658817?s=20">Wes Bos explained</a>.</li>
+				<li>Use consistent capitalization. Capitalization can tell you a lot about your variables, functions, etc. These rules are subjective, so can choose whatever makes sense, but the point is, no matter what is choosen, be consistent.</li>
+				<li>Prefer <code>async/await</code> over Promises and over callbacks. Avoid <code>try/catch</code> blocks as well.</li>
+				<li>camelCase variables and function names wherever possible.  In the case of constants, you may choose to upper snake case, e.g <code>const A_LONG_CONSTANT_VARIABLE = 'foo';</code>
+			</ul>
+		</div>
+		<div class="col">
+			{% highlight js %}{% include js/syntax.js %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="variables">
+	<h2>Variables</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>Use meaningful and pronounceable variable names.</li>
+				<li>Use the same vocabulary for the same type of variable.</li>
+				<li>Use searchable names. You will read more code than you write so it's important that the code written is readable and searchable. By not naming variables that end up being meaningful for understanding our program, we hurt our readers. Make your names searchable.</li>
+				<li>Use explanatory variables.</li>
+				<li>Avoid mental mapping. Explicit is better than implicit.</li>
+				<li>Don't add unneeded context. If your class or object name tells you something, don't repeat that in your variable name.</li>
+				<li>Follow the DOMs API by prefixing getters with <code>get</code> and setters with <code>set</code>.</li>
+			</ul>
+		</div>
+		<div class="col">
+			{% highlight js %}{% include js/variables.js %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="functions">
+	<h2>Functions</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>Limiting the amount of function parameters is incredibly important because it makes testing your function easier. Having more than three leads to a combinatorial explosion where you have to test tons of different cases with each separate argument.</li>
+				<li>Use destructuring syntax to make it obvious what properties the function expects. This clones the specified primitive values of the argument object passed into the function and helps prevent side effects. Note: objects and arrays that are destructured from the argument object are NOT cloned. Linters can warn you about unused properties, which would be impossible without destructuring.</li>
+				<li>This is by far the most important rule in software engineering. When functions do more than one thing, they are harder to compose, test, and reason about. When you can isolate a function to just one action, it can be refactored easily and your code will read much cleaner. If you take nothing else away from this guide other than this, you'll be ahead of many developers.</li>
+				<li>Naming things can be hard, but the best advice is to name things for what they do or return</li>
+				<li>Functions should only be one level of abstraction. When you have more than one level of abstraction your function is usually doing too much. Splitting up functions leads to reusability and easier testing.</li>
+			</ul>
+		</div>
+		<div class="col">
+			{% highlight js %}{% include js/functions.js %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="classes">
+	<h2>Classes</h2>
+	<div class="grid">
+		<div class="col">
+			<p><strong>Prefer ES2015/ES6 classes over ES5 plain functions</strong></p>
+			<p>It's very difficult to get readable class inheritance, construction, and method definitions for classical ES5 classes. If you need inheritance (and be aware that you might not), then prefer ES2015/ES6 classes. However, prefer small functions over classes until you find yourself needing larger and more complex objects.</p>
+			<p><strong>Use method chaining</strong></p>
+			<p>This pattern is very useful in JavaScript and you see it in many libraries such as jQuery and Lodash. It allows your code to be expressive, and less verbose. For that reason, use method chaining and take a look at how clean your code will be. In your class functions, simply return this at the end of every function, and you can chain further class methods onto it.</p>
+		</div>
+		<div class="col">
+			{% highlight js %}{% include js/classes.js %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="error-handling">
+	<h2>Error Handling</h2>
+	<div class="grid">
+		<div class="col">
+			<p>Thrown errors are a good thing! They mean the runtime has successfully identified when something in your program has gone wrong and it's letting you know by stopping function execution on the current stack, killing the process (in Node), and notifying you in the console with a stack trace.</p>
+			<p><strong>Do not ignore caught errors.</strong> Doing nothing with a caught error doesn't give you the ability to ever fix or react to said error. Logging the error to the console (console.log) isn't much better as often times it can get lost in a sea of things printed to the console. If you wrap any bit of code in a try/catch it means you think an error may occur there and therefore you should have a plan, or create a code path, for when it occurs.</p>
+			<p>For the same reason you shouldn't ignore caught errors from <code>try/catch</code>.</p>
+
+		</div>
+		<div class="col">
+			{% highlight js %}{% include js/error-handling.js %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="comments">
+	<h2>Comments</h2>
+	<div class="grid">
+		<div class="col">
+			<p>Code is written and maintained by people. Ensure your code is descriptive, well commented, and approachable by others. Great code comments convey context or purpose. Do not simply reiterate a component or class name.</p>
+			<p>Be sure to write in complete sentences for larger comments and succinct phrases for general notes. And avoid journal style comments in favor of better commit messages and <code>git log</code> for history.</p>
+			<p>Comments are not meant to replace version control, so don't comment out code or mark to do later; remove it and create a commit in history.</p>
+		</div>
+		<div class="col">
+			{% highlight js %}{% include js/comments.js %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="organization">
+	<h2>Organization</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>We tend to read code from top-to-bottom, like a newspaper. Because of this, make your code read that way. e.g. if a function calls another, keep those functions vertically close in the source file. Ideally, keep the caller right above the callee.</li>
+			</ul>
+		</div>
+		<div class="col">
+			{% highlight js %}{% include js/organization.js %}{% endhighlight %}
+		</div>
+	</div>
+</section>

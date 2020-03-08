@@ -1,7 +1,7 @@
 name: The Holocron
 description: Standards for developing consistent, flexible, and sustainable code within the Galaxy.
 url: https://the-holocron.github.io
-repo: https://github.com/the-holocron/the-holocron.github.io
+repo: 'https://github.com/the-holocron/the-holocron.github.io'
 permalink: pretty
 sass:
   style: compressed

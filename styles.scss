@@ -2,11 +2,36 @@
 # Front matter comment to ensure Jekyll properly reads file.
 ---
 
-/*
- * Code Guide by @mdo
- * Licensed MIT
- * https://codeguide.co
- */
+:root {
+	--red: #f03e3e;
+	--orange: #f14a29;
+	--yellow: #f7df1e;
+	--green: #28a745;
+	--blue: #264de4;
+	--cyan: #1098ad;
+	--indigo: #4263eb;
+	--violet: #7048e8;
+	--pink: #d6336c;
 
+	--black: #2a2a2a;
+	--dark-gray: #343a40;
+	--medium-gray: #6c757d;
+	--light-gray: #f8f9fa;
+	--white: #fff;
+
+	--body-color: var(--black);
+	--body-base: var(--pink);
+
+	--link-color: var(--body-color);
+	--heading-color: var(--body-color);
+	--selection-color: var(--body-base);
+
+	--css-base: var(--blue);
+	--html-base: var(--orange);
+	--js-base: var(--yellow);
+}
+
+@import "reset";
+@import "layout";
 @import "syntax";
-@import "index";
+@import "theme";

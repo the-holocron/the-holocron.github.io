@@ -1,0 +1,25 @@
+.html {
+	--body-base: var(--html-base);
+	--selection-color: var(--html-base);
+	--link-color: var(--html-base);
+	--heading-color: var(--html-base);
+}
+
+.css {
+	--body-base: var(--css-base);
+	--selection-color: var(--css-base);
+	--link-color: var(--css-base);
+	--heading-color: var(--css-base);
+}
+
+.js {
+	--body-base: var(--js-base);
+	--selection-color: var(--js-base);
+	--link-color: var(--js-base);
+	--heading-color: var(--js-base);
+
+	.masthead svg {
+		width: 3.5rem;
+		height: 3.5rem;
+	}
+}
