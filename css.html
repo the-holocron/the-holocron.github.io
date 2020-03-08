@@ -1,0 +1,237 @@
+---
+layout: default
+title: CSS
+description: Standards for writing consistent, flexible, and sustainable styles within the Galaxy.
+icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 362.734 512">
+	<title>CSS3 Logo Badge</title>
+	<path fill="#fff" d="M362.734 100.62l-33.046 370.199L181.145 512 33.011 470.877 0 100.62z"/>
+	<path fill="#2965f1" d="M237.128 313.627l-5.271 58.894-50.647 13.67v47.244l93.094-25.801.683-7.672 10.671-119.551 1.108-12.194 8.198-91.912H181.21v45.411h63.988l-4.132 46.501H181.21v45.41z"/>
+		<path opacity="0.8" fill="#2965f1" d="M75.677 268.217l4.07 45.41h101.62v-45.41zM181.367 176.305H67.499l4.128 45.411h109.74zM181.367 433.399v-47.246l-.199.053-50.574-13.656-3.233-36.217H81.776l6.362 71.301 93.02 25.823z"/>
+	<g opacity="0.2">
+		<path fill="#2965f1" d="M301.397 447.246l28.24-316.352h-148.27v349.629z"/>
+	</g>
+</svg>'
+---
+
+<section class="section" id="css-syntax">
+	<h2>Syntax</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>Use tabs with four spaces—code does not need to be rendered the same in any environment and developers should feel free to choose what works best for them to read</li>
+				<li>When grouping selectors, keep individual selectors to a single line.</li>
+				<li>Include one space before the opening brace of declaration blocks for legibility.</li>
+				<li>Place closing braces of declaration blocks on a new line.</li>
+				<li>Include one space after <code>:</code> for each declaration.</li>
+				<li>Each declaration should appear on its own line for more accurate error reporting.</li>
+				<li>End all declarations with a semi-colon. The last declaration's is optional, but your code is more error prone without it.</li>
+				<li>Comma-separated property values should include a space after each comma (e.g., <code>box-shadow</code>).</li>
+				<li>Include spaces after commas within <code>rgb()</code>, <code>rgba()</code>, <code>hsl()</code>, <code>hsla()</code>, or <code>rect()</code> values.</li>
+				<li>Prefix property values or color parameters with a leading zero (e.g., <code>0.5</code> instead of <code>.5</code> and <code>-0.5px</code> instead of <code>-.5px</code>).</li>
+				<li>Do not use hex values (prefer <code>rgb()</code> or <code>hsl()</code> but if you must use hex values then lower case them, e.g., <code>#fff</code>. Lowercase letters are much easier to discern when scanning a document as they tend to have more unique shapes.</li>
+				<li>Prefer relative units for typography and most properties over fixed units, e.g. <code>rem</code>, <code>em</code>. The one exception is for <code>width</code> and <code>height</code> properties.</p>
+				<li>Quote attribute values in selectors, e.g., <code>input[type="text"]</code>. <a href="http://mathiasbynens.be/notes/unquoted-attribute-values#css">They’re only optional in some cases</a>, and it’s a good practice for consistency.</li>
+				<li>Avoid specifying units for zero values, e.g., <code>margin: 0;</code> instead of <code>margin: 0px;</code>.</li>
+			</ul>
+			<p>Questions on the terms used here? See the <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets#Syntax">syntax section of the Cascading Style Sheets article</a> on Wikipedia.</p>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/syntax.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-declaration-order">
+	<h2>Declaration order</h2>
+	<div class="grid">
+		<div class="col">
+			<p>Related property declarations should be grouped together following the order:</p>
+			<ol>
+				<li>Display</li>
+				<li>Positioning</li>
+				<li>Box model</li>
+				<li>Typography</li>
+				<li>Animation</li>
+			</ol>
+			<p>Display properties come first because they determine whether or not a element shows up, thus negating anything coming after it.</p>
+			<p>Positioning comes next because it can remove an element from the normal flow of the document and override box model related styles.</p>
+			<p>The box model comes next as it dictates a component's dimensions and placement.</p>
+			<p>Everything else takes place <em>inside</em> the component or without impacting the previous sections, and thus they come last.</p>
+			<p>For a complete list of properties and their order, please see the <a href="https://github.com/the-holocron/threepio/blob/master/packages/stylelint-config/stylelintrc.json#L362">property order for our Stylelint</a>.</p>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/declaration-order.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-import">
+	<h2>Don't use <code>@import</code></h2>
+	<div class="grid">
+		<div class="col">
+			<p>Compared to <code>&lt;link&gt;</code>s, <code>@import</code> is slower, adds extra page requests, and can cause other unforeseen problems. Avoid them and instead opt for an alternate approach:</p>
+			<ul>
+				<li>Use multiple <code>&lt;link&gt;</code> elements</li>
+				<li>Compile your CSS with a preprocessor like <a href="https://sass-lang.com/">Sass</a> into a single file</li>
+				<li>Concatenate your CSS files with features provided in NodeJS, Jekyll, or other environments</li>
+			</ul>
+			<p>For more information, <a href="http://www.stevesouders.com/blog/2009/04/09/dont-use-import/">read this article by Steve Souders</a>.</p>
+		</div>
+		<div class="col">
+			{% highlight html %}{% include css/import.html %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-media-queries">
+	<h2>Media query placement</h2>
+	<div class="grid">
+		<div class="col">
+			<p>Place media queries as close to their relevant rule sets whenever possible. Don't bundle them all in a separate stylesheet or at the end of the document. Doing so only makes it easier for folks to miss them in the future. Here's a typical setup.</p>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/media-queries.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-prefixed-properties">
+	<h2>Prefixed properties</h2>
+	<p>Do not use vendor-prefixed properties; use tools like <code>autoprefixer</code> and <a href="https://browserl.ist">browserlist</a> to handle situations like this as it keeps code future proof.</p>
+</section>
+
+<section class="section" id="css-single-declarations">
+	<h2>Single declarations</h2>
+	<div class="grid">
+		<div class="col">
+			<p>In instances where a rule set includes <strong>only one declaration</strong>, consider removing line breaks for readability and faster editing. Any rule set with multiple declarations should be split to separate lines.</p>
+			<p>The key factor here is error detection—e.g., a CSS validator stating you have a syntax error on Line 183. With a single declaration, there's no missing it. With multiple declarations, separate lines is a must for your sanity.</p>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/single-declarations.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-shorthand">
+	<h2>Shorthand notation</h2>
+	<div class="grid">
+		<div class="col">
+			<p>Limit shorthand declaration usage to instances where you must explicitly set all available values. Frequently overused shorthand properties include:</p>
+			<ul>
+				<li><code>padding</code></li>
+				<li><code>margin</code></li>
+				<li><code>font</code></li>
+				<li><code>background</code></li>
+				<li><code>border</code></li>
+				<li><code>border-radius</code></li>
+			</ul>
+			<p>Usually we don't need to set all the values a shorthand property represents. For example, HTML headings only set top and bottom margin, so when necessary, only override those two values. A <code>0</code> value implies an override of either a browser default or previously specified value.</p>
+			<p>Excessive use of shorthand properties leads to sloppier code with unnecessary overrides and unintended side effects.</p>
+			<p>The Mozilla Developer Network has a great article on <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties">shorthand properties</a> for those unfamiliar with notation and behavior.</p>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/shorthand.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-nesting">
+	<h2>Nesting in Sass</h2>
+	<div class="grid">
+		<div class="col">
+			<p>Avoid unnecessary nesting. Just because you can nest, doesn't mean you always should. Consider nesting only if you must scope styles to a parent and if there are multiple elements to be nested.</p>
+			<p>Additional reading:</p>
+			<ul>
+				<li><a href="http://markdotto.com/2015/07/20/css-nesting/">Nesting in Sass</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			{% highlight scss %}{% include css/nesting.scss %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-operators">
+	<h2>Operators in Sass</h2>
+	<div class="grid">
+		<div class="col">
+			<p>For improved readability, wrap all math operations in parentheses with a single space between values, variables, and operators.</p>
+		</div>
+		<div class="col">
+			{% highlight scss %}{% include css/operators.scss %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-comments">
+	<h2>Comments</h2>
+	<div class="grid">
+		<div class="col">
+			<p>Code is written and maintained by people. Ensure your code is descriptive, well commented, and approachable by others. Great code comments convey context or purpose. Do not simply reiterate a component or class name.</p>
+			<p>Be sure to write in complete sentences for larger comments and succinct phrases for general notes.</p>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/comments.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-classes">
+	<h2>Class names</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>Keep classes lowercase and use dashes (not underscores nor camelCase). Dashes serve as natural breaks in related class (e.g., <code>.btn</code> and <code>.btn-danger</code>).</li>
+				<li>Avoid excessive and arbitrary shorthand notation. <code>.btn</code> is useful for <em>button</em>, but <code>.s</code> doesn't mean anything.</li>
+				<li>Keep classes as short and succinct as possible.</li>
+				<li>Use meaningful names; use structural or purposeful names over presentational.</li>
+				<li>Prefix classes based on the closest parent or base class.</li>
+				<li>Use <code>[data-*]</code> attribute and attribute selectors to denote behavior (as opposed to style), but keep these classes out of your CSS.</li>
+			</ul>
+			<p>It's also useful to apply many of these same rules when creating Sass variable names.</p>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/class-names.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-selectors">
+	<h2>Selectors</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>Use classes over generic element tag for optimum rendering performance.</li>
+				<li>Avoid using several attribute selectors (e.g., <code>[class^="..."]</code>) on commonly occuring components. Browser performance is known to be impacted by these.</li>
+				<li>Keep selectors short and strive to limit the number of elements in each selector to three.</li>
+				<li>Scope classes to the closest parent <strong>only</strong> when necessary (e.g., when not using prefixed classes).</li>
+			</ul>
+			<p>Additional reading:</p>
+			<ul>
+				<li><a href="http://markdotto.com/2012/02/16/scope-css-classes-with-prefixes/">Scope CSS classes with prefixes</a></li>
+				<li><a href="http://markdotto.com/2012/03/02/stop-the-cascade/">Stop the cascade</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/selectors.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
+
+<section class="section" id="css-organization">
+	<h2>Organization</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>Organize sections of code by component.</li>
+				<li>Develop a consistent commenting hierarchy.</li>
+				<li>Use consistent white space to your advantage when separating sections of code for scanning larger documents.</li>
+				<li>When using multiple CSS files, break them down by component instead of page. Pages can be rearranged and components moved.</li>
+			</ul>
+		</div>
+		<div class="col">
+			{% highlight css %}{% include css/organization-comments.css %}{% endhighlight %}
+		</div>
+	</div>
+</section>
