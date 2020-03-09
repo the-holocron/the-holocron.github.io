@@ -6,7 +6,7 @@
 	--red: #f03e3e;
 	--orange: #f14a29;
 	--yellow: #f7df1e;
-	--green: #28a745;
+	--green: #4DA825;
 	--blue: #264de4;
 	--cyan: #1098ad;
 	--indigo: #4263eb;
@@ -16,6 +16,7 @@
 	--black: #2a2a2a;
 	--dark-gray: #343a40;
 	--medium-gray: #6c757d;
+	--gray: #b2b2b2;
 	--light-gray: #f8f9fa;
 	--white: #fff;
 
@@ -26,6 +27,7 @@
 	--heading-color: var(--body-color);
 	--selection-color: var(--body-base);
 
+	--cli-base: var(--green);
 	--css-base: var(--blue);
 	--html-base: var(--orange);
 	--js-base: var(--yellow);

@@ -116,3 +116,23 @@ pre {
 	}
 }
 
+table {
+	width: fit-content;
+	border-collapse: collapse;
+
+	&,
+	td,
+	th {
+		border: 1px solid var(--black);
+	}
+
+	td,
+	th {
+		padding: .125rem .5rem;
+		text-align: left;
+	}
+
+	th {
+		background-color: var(--gray);
+	}
+}

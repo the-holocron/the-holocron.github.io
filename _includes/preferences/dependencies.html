@@ -1,0 +1,13 @@
+<section class="section" id="choosing-dependencies">
+	<h2>Choosing Dependencies</h2>
+	<p>Consider a few things when choosing dependencies:</p>
+	<ul>
+		<li>Audit your packages on a regular basis to see if they have become unused or irrelevant in order to keep down your bundle size. Use a tool like <a href="https://www.npmjs.com/package/depcheck">depcheck</a> or <code>npm outdated</code> to check the registry to see if any (or, specific) installed packages are currently outdated.</li>
+		<li>Before using a dependency, check its download statistics and a mature version release frequency with a large number of maintainers to see if it is heavily used by the community. More usage mostly means more contributors, which usually means better maintenance, and all of these result in quickly discovered bugs and quickly developed fixes. Use <a href="https://npm-stat.com/">npm-stat</a>.</li>
+		<li>Having loads of contributors won't be as effective if maintainers don't merge fixes and patches quickly enough. Use <a href="https://docs.npmjs.com/cli/view"><code>npm view</code></a></li>
+		<li>Always make sure your code works with the latest version of its dependencies without breaking, before commiting back.</li>
+		<li>Dependency updates sometimes contain breaking changes. Always check their release notes when updates show up. Update your dependencies one by one, that makes troubleshooting easier if anything goes wrong. Use a tool such as <a href="https://github.com/tjunnone/npm-check-updates">npm-check-updates</a>.</li>
+		<li>Check to see if the package has known security vulnerabilities. Use something like <a href="https://snyk.io/test">Snyk</a>.</li>
+		<li>Make sure you use resources that you have the rights to use. If you use libraries, remember to look for MIT, Apache or BSD but if you modify them, then take a look at the license details. Copyrighted images and videos may cause legal problems.</li>
+	</ul>
+</section>
