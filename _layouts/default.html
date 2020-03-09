@@ -12,7 +12,8 @@
 		<link rel="canonical" href="{{ site.url }}">
 		<link rel="stylesheet" href="{{ site.url }}/styles.css">
 	</head>
-	<body class="{{ page.title | downcase }}">
+	<body class="{% if page.title %}{{ page.title | downcase }}{% else %}home{% endif %}">
+		{% include navigation.html %}
 		{% include header.html %}
 		<main class="container main" role="main">{{ content }}</main>
 		{% include footer.html %}
