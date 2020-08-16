@@ -1,0 +1,15 @@
+<section class="section" id="organization">
+	<h2>Organization</h2>
+	<div class="grid">
+		<div class="col">
+			<ul>
+				<li>Organize your files around product features / pages / components, not roles. Read up on the <a href="https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c">ducks file structure</a>.</li>
+				<li>Instead of a long list of files, you will create small modules that encapsulate one responsibility including its test and so on. It gets much easier to navigate through and things can be found at a glance.</li>
+				<li>Put your scripts in a <code>./bin</code> folder. This includes bash and node scripts.</li>
+				<li>Place your build output in a <code>./dist</code> folder. Add <code>dist/</code> to <code>.gitignore</code>.</li>
+			</ul>
+		</div>
+		<div class="col">
+			{% highlight markdown %}{% include preferences/file-structure.md %}{% endhighlight %}
+		</div>
+</section>
